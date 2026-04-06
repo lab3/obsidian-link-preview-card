@@ -1,0 +1,261 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Link Preview Card — horizontal iMessage style
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.link-preview-card {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 560px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--background-modifier-border);
+    background: var(--background-secondary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    margin: 0.3em 0;
+    font-size: 0.85em;
+    transition: box-shadow 0.15s ease;
+    vertical-align: top;
+}
+
+.link-preview-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
+}
+
+/* ── Loading skeleton ──────────────────────────────────────────────────────── */
+
+.link-preview-state-loading {
+    padding: 10px 12px;
+}
+
+.link-preview-skeleton-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.link-preview-skeleton-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 6px;
+    background: var(--background-modifier-border);
+    flex-shrink: 0;
+    animation: lp-shimmer 1.4s ease-in-out infinite;
+}
+
+.link-preview-skeleton-lines {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.link-preview-skeleton-bar {
+    height: 9px;
+    border-radius: 5px;
+    background: var(--background-modifier-border);
+    animation: lp-shimmer 1.4s ease-in-out infinite;
+}
+
+.lp-bar-short  { width: 35%; }
+.lp-bar-long   { width: 90%; }
+.lp-bar-medium { width: 60%; }
+
+@keyframes lp-shimmer {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 1;   }
+}
+
+/* ── Error state ───────────────────────────────────────────────────────────── */
+
+.link-preview-state-error {
+    padding: 9px 12px;
+}
+
+.link-preview-error-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.link-preview-error-icon {
+    color: var(--text-muted);
+}
+
+.link-preview-error-link {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-preview-error-link:hover {
+    text-decoration: underline;
+}
+
+.link-preview-error-domain {
+    color: var(--text-muted);
+    font-size: 0.82em;
+    margin-left: auto;
+}
+
+/* ── Loaded card ───────────────────────────────────────────────────────────── */
+
+.link-preview-anchor {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: pointer;
+}
+
+/* Main row */
+.link-preview-main-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px 12px;
+    align-items: center;
+}
+
+/* Thumbnail */
+.link-preview-thumb-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--background-modifier-border);
+}
+
+.link-preview-thumb-wrap.link-preview-thumb-hidden {
+    display: none;
+}
+
+.link-preview-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Favicon fallback thumbnail */
+.link-preview-thumb-favicon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.link-preview-thumb-fav-img {
+    width: 28px;
+    height: 28px;
+}
+
+/* Text column */
+.link-preview-text-col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.link-preview-title {
+    font-size: 0.92em;
+    font-weight: 600;
+    color: var(--text-normal);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.link-preview-description {
+    font-size: 0.78em;
+    color: var(--text-muted);
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.link-preview-domain {
+    font-size: 0.72em;
+    color: var(--text-faint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* URL row */
+.link-preview-url-row {
+    border-top: 1px solid var(--background-modifier-border);
+    padding: 5px 12px;
+}
+
+.link-preview-url {
+    font-size: 0.72em;
+    color: var(--link-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* ── Toggle button ─────────────────────────────────────────────────────────── */
+
+.link-preview-toggle {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--background-modifier-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, background 0.1s ease;
+    z-index: 2;
+}
+
+.link-preview-card:hover .link-preview-toggle {
+    opacity: 1;
+}
+
+.link-preview-toggle:hover {
+    background: var(--background-modifier-border-hover);
+}
+
+.link-preview-toggle svg {
+    width: 12px;
+    height: 12px;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.link-preview-toggle.lp-toggle-open svg {
+    transform: rotate(180deg);
+}
+
+/* ── Collapsed state ───────────────────────────────────────────────────────── */
+
+.link-preview-collapsed .link-preview-anchor {
+    display: none;
+}
+
+.link-preview-collapsed {
+    padding: 5px 32px 5px 12px;
+}
+
+.link-preview-collapsed::before {
+    content: attr(data-domain);
+    font-size: 0.78em;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
