@@ -26,7 +26,6 @@ export default class LinkPreviewPlugin extends Plugin {
     private cache = new Map<string, OGMetadata | Error>();
 
     async onload() {
-        console.log("[LinkPreview] onload start");
         await this.loadSettings();
         this.addSettingTab(new LinkPreviewSettingTab(this.app, this));
 
@@ -45,11 +44,7 @@ export default class LinkPreviewPlugin extends Plugin {
         });
 
         // Live Preview (CodeMirror 6)
-        console.log("[LinkPreview] registering editor extension");
-        const ext = createLivePreviewExtension(this);
-        console.log("[LinkPreview] extension created:", ext);
-        this.registerEditorExtension(ext);
-        console.log("[LinkPreview] onload done");
+        this.registerEditorExtension(createLivePreviewExtension(this));
     }
 
     async loadSettings() {

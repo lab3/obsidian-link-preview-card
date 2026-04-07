@@ -31,7 +31,7 @@ class LinkPreviewWidget extends WidgetType {
         renderSkeleton(el);
 
         this.plugin.fetchMetadata(this.url).then(
-            (meta) => { if (el.isConnected) renderCard(el, meta, this.plugin.getCollapsed(this.url), (c) => this.plugin.setCollapsed(this.url, c)); },
+            (meta) => { if (el.isConnected) renderCard(el, meta, this.plugin.getCollapsed(this.url), (c) => { this.plugin.setCollapsed(this.url, c); }); },
             ()     => { if (el.isConnected) renderError(el, this.url, this.alt); },
         );
 

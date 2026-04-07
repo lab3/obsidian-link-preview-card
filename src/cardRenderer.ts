@@ -78,7 +78,8 @@ export function renderCard(el: HTMLElement, meta: OGMetadata, initialCollapsed: 
     let collapsed = initialCollapsed;
     const toggle = el.createDiv("link-preview-toggle");
     toggle.setAttribute("aria-label", "Toggle preview");
-    toggle.innerHTML = chevronSvg();
+    const svg = toggle.createSvg("svg", { attr: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2.5", "stroke-linecap": "round", "stroke-linejoin": "round" } });
+    svg.createSvg("polyline", { attr: { points: "6 9 12 15 18 9" } });
     el.toggleClass("link-preview-collapsed", collapsed);
     toggle.toggleClass("lp-toggle-open", !collapsed);
 
@@ -98,8 +99,4 @@ export function safeHostname(url: string): string {
     } catch {
         return url;
     }
-}
-
-function chevronSvg(): string {
-    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
 }
