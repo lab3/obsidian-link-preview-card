@@ -57,11 +57,16 @@ function buildDecorations(state: EditorState, plugin: LinkPreviewPlugin): Decora
         const [, alt, url] = match;
         if (isDirectImageUrl(url)) continue;
 
-        // Show raw markdown when cursor is on this line so the user can edit
+        // When cursor is on line: mark it so CSS hides the adjacent image-embed widget
         const cursorOnLine = selection.ranges.some(
             (r) => r.from >= line.from && r.from <= line.to,
         );
-        if (cursorOnLine) continue;
+        if (cursorOnLine) {
+            builder.add(line.from, line.from, Decoration.line({
+                attributes: { class: "lp-cursor-on-link" },
+            }));
+            continue;
+        }
 
         builder.add(line.from, line.to, Decoration.replace({
             widget: new LinkPreviewWidget(url, alt, plugin),

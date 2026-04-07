@@ -25,7 +25,6 @@ export function renderError(el: HTMLElement, url: string, alt: string): void {
 
 export function renderCard(el: HTMLElement, meta: OGMetadata, defaultCollapsed: boolean): void {
     el.className = "link-preview-card link-preview-state-loaded";
-    el.setAttribute("data-domain", meta.siteName);
     el.empty();
 
     const anchor = el.createEl("a", { cls: "link-preview-anchor" });
@@ -67,6 +66,13 @@ export function renderCard(el: HTMLElement, meta: OGMetadata, defaultCollapsed: 
     // ── URL row ───────────────────────────────────────────────────────────────
     const urlRow = anchor.createDiv("link-preview-url-row");
     urlRow.createSpan({ cls: "link-preview-url", text: meta.url });
+
+    // ── Collapsed link ────────────────────────────────────────────────────────
+    const collapsedLink = el.createEl("a", { cls: "link-preview-collapsed-link" });
+    collapsedLink.href = meta.url;
+    collapsedLink.target = "_blank";
+    collapsedLink.rel = "noopener noreferrer";
+    collapsedLink.setText(meta.url);
 
     // ── Toggle ────────────────────────────────────────────────────────────────
     let collapsed = defaultCollapsed;

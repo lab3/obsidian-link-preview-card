@@ -23,6 +23,13 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
 }
 
+/* ── Hide Obsidian's image-embed when cursor is on our link line ───────────── */
+
+.cm-line.lp-cursor-on-link + .image-embed,
+.cm-line.lp-cursor-on-link + .cm-widgetBuffer + .image-embed {
+    display: none !important;
+}
+
 /* ── Loading skeleton ──────────────────────────────────────────────────────── */
 
 .link-preview-state-loading {
@@ -250,12 +257,20 @@
     padding: 5px 32px 5px 12px;
 }
 
-.link-preview-collapsed::before {
-    content: attr(data-domain);
+.link-preview-collapsed-link {
+    display: none;
+}
+
+.link-preview-collapsed .link-preview-collapsed-link {
+    display: block;
     font-size: 0.78em;
-    color: var(--text-muted);
+    color: var(--link-color);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
+    text-decoration: none;
+}
+
+.link-preview-collapsed .link-preview-collapsed-link:hover {
+    text-decoration: underline;
 }
