@@ -23,7 +23,7 @@ export function renderError(el: HTMLElement, url: string, alt: string): void {
     row.createSpan({ cls: "link-preview-error-domain", text: hostname });
 }
 
-export function renderCard(el: HTMLElement, meta: OGMetadata, defaultCollapsed: boolean): void {
+export function renderCard(el: HTMLElement, meta: OGMetadata, initialCollapsed: boolean, onToggle: (collapsed: boolean) => void): void {
     el.className = "link-preview-card link-preview-state-loaded";
     el.empty();
 
@@ -75,7 +75,7 @@ export function renderCard(el: HTMLElement, meta: OGMetadata, defaultCollapsed: 
     collapsedLink.setText(meta.url);
 
     // ── Toggle ────────────────────────────────────────────────────────────────
-    let collapsed = defaultCollapsed;
+    let collapsed = initialCollapsed;
     const toggle = el.createDiv("link-preview-toggle");
     toggle.setAttribute("aria-label", "Toggle preview");
     toggle.innerHTML = chevronSvg();
@@ -88,6 +88,7 @@ export function renderCard(el: HTMLElement, meta: OGMetadata, defaultCollapsed: 
         collapsed = !collapsed;
         el.toggleClass("link-preview-collapsed", collapsed);
         toggle.toggleClass("lp-toggle-open", !collapsed);
+        onToggle(collapsed);
     });
 }
 

@@ -3,10 +3,12 @@ import type LinkPreviewPlugin from "./main";
 
 export interface LinkPreviewSettings {
     defaultCollapsed: boolean;
+    collapsedUrls: Record<string, boolean>;
 }
 
 export const DEFAULT_SETTINGS: LinkPreviewSettings = {
     defaultCollapsed: false,
+    collapsedUrls: {},
 };
 
 export class LinkPreviewSettingTab extends PluginSettingTab {

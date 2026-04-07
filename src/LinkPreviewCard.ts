@@ -17,7 +17,7 @@ export class LinkPreviewCard extends MarkdownRenderChild {
     async onload() {
         try {
             const meta = await this.plugin.fetchMetadata(this.url);
-            renderCard(this.containerEl, meta, this.plugin.settings.defaultCollapsed);
+            renderCard(this.containerEl, meta, this.plugin.getCollapsed(this.url), (c) => this.plugin.setCollapsed(this.url, c));
         } catch {
             renderError(this.containerEl, this.url, this.alt);
         }

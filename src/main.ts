@@ -60,6 +60,15 @@ export default class LinkPreviewPlugin extends Plugin {
         await this.saveData(this.settings);
     }
 
+    getCollapsed(url: string): boolean {
+        return this.settings.collapsedUrls[url] ?? this.settings.defaultCollapsed;
+    }
+
+    async setCollapsed(url: string, collapsed: boolean): Promise<void> {
+        this.settings.collapsedUrls[url] = collapsed;
+        await this.saveSettings();
+    }
+
     async fetchMetadata(url: string): Promise<OGMetadata> {
         const cached = this.cache.get(url);
         if (cached instanceof Error) throw cached;
