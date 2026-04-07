@@ -3,7 +3,7 @@
     "name": "Link Preview Card",
     "version": "1.0.0",
     "minAppVersion": "1.12.7",
-    "description": "Renders rich link preview cards for ![Name](URL) syntax similar to the format Singal uses for link previews.",
+    "description": "Renders rich link preview cards for ![Name](URL) syntax similar to the format Signal uses for link previews.",
     "author": "Len Bucchino",
     "authorUrl": "https://github.com/lab3",
     "isDesktopOnly": false
