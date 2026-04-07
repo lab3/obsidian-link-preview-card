@@ -2,8 +2,8 @@
     "id": "link-preview-card",
     "name": "Link Preview Card",
     "version": "1.0.0",
-    "minAppVersion": "1.0.0",
-    "description": "Renders rich link preview cards for ![Name](URL) syntax — like iMessage/Signal link previews.",
-    "author": "len",
+    "minAppVersion": "1.12.7",
+    "description": "Renders rich link preview cards for ![Name](URL) syntax similar to the format Singal uses for link previews.",
+    "author": "Len Bucchino",
     "isDesktopOnly": false
 }
